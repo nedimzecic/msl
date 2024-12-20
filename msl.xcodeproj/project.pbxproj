@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CF9B709E2C6F314B001BA368 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9B709D2C6F314B001BA368 /* main.swift */; };
+		2E004E792D144E3B001A1CA3 /* list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E004E782D144E37001A1CA3 /* list.swift */; };
+		2E004E7B2D146844001A1CA3 /* start.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E004E7A2D146836001A1CA3 /* start.swift */; };
+		2E004E7D2D14684C001A1CA3 /* install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E004E7C2D146848001A1CA3 /* install.swift */; };
+		CF9B709E2C6F314B001BA368 /* msl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9B709D2C6F314B001BA368 /* msl.swift */; };
 		CFF78D512C70C02D009D5D6E /* helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF78D502C70C02D009D5D6E /* helper.swift */; };
 		CFF78D542C710FB8009D5D6E /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = CFF78D532C710FB8009D5D6E /* ArgumentParser */; };
 /* End PBXBuildFile section */
@@ -25,8 +28,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E004E782D144E37001A1CA3 /* list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = list.swift; sourceTree = "<group>"; };
+		2E004E7A2D146836001A1CA3 /* start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = start.swift; sourceTree = "<group>"; };
+		2E004E7C2D146848001A1CA3 /* install.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = install.swift; sourceTree = "<group>"; };
 		CF9B709A2C6F314B001BA368 /* msl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = msl; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF9B709D2C6F314B001BA368 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		CF9B709D2C6F314B001BA368 /* msl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = msl.swift; sourceTree = "<group>"; };
 		CF9B70A42C6F31D2001BA368 /* msl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = msl.entitlements; sourceTree = "<group>"; };
 		CF9B70A52C6F321B001BA368 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CFF78D502C70C02D009D5D6E /* helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helper.swift; sourceTree = "<group>"; };
@@ -64,9 +70,12 @@
 		CF9B709C2C6F314B001BA368 /* msl */ = {
 			isa = PBXGroup;
 			children = (
-				CFF78D502C70C02D009D5D6E /* helper.swift */,
-				CF9B709D2C6F314B001BA368 /* main.swift */,
 				CF9B70A42C6F31D2001BA368 /* msl.entitlements */,
+				CFF78D502C70C02D009D5D6E /* helper.swift */,
+				2E004E7C2D146848001A1CA3 /* install.swift */,
+				2E004E782D144E37001A1CA3 /* list.swift */,
+				2E004E7A2D146836001A1CA3 /* start.swift */,
+				CF9B709D2C6F314B001BA368 /* msl.swift */,
 			);
 			path = msl;
 			sourceTree = "<group>";
@@ -102,7 +111,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					CF9B70992C6F314B001BA368 = {
 						CreatedOnToolsVersion = 15.4;
@@ -135,8 +144,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E004E7B2D146844001A1CA3 /* start.swift in Sources */,
 				CFF78D512C70C02D009D5D6E /* helper.swift in Sources */,
-				CF9B709E2C6F314B001BA368 /* main.swift in Sources */,
+				2E004E7D2D14684C001A1CA3 /* install.swift in Sources */,
+				CF9B709E2C6F314B001BA368 /* msl.swift in Sources */,
+				2E004E792D144E3B001A1CA3 /* list.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +189,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -240,6 +253,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -266,9 +280,13 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = msl/msl.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 2PFVDEFU8R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.rebbit.msl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -280,9 +298,13 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = msl/msl.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 2PFVDEFU8R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.rebbit.msl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

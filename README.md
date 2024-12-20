@@ -1,76 +1,77 @@
 # macOS Subsystem for Linux
 
-A small WSL2-like tool for running lightweight linux virtual machines on macOS. Code is based on Apple's Virtualization framework examples [https://developer.apple.com/documentation/virtualization]. Linux GUI is not supported.
+A small WSL2-like tool for running lightweight linux virtual machines on macOS. Code is based on Apple's Virtualization framework examples. This is pure terminal application therefore ISO installer has to support serial console output.
 
 ```
 msl --help
 
-USAGE: msl [--cpu <cpu>] [--ram <ram>] [--kernel <kernel>] [--ramdisk <ramdisk>] [--disk <disk>] [--cmd <cmd>] [--mac <mac>] [--nvme]
+USAGE: msl <subcommand>
 
 OPTIONS:
-  --cpu <cpu>             Number of CPUs VM will use (default: 1)
-  --ram <ram>             RAM size in MB (default: 1024)
-  --kernel <kernel>       Kernel image path (default: vmlinuz)
-  --ramdisk <ramdisk>     Ramdisk image path (default: initrd)
-  --disk <disk>           Root image path
-  --cmd <cmd>             Kernel's command-line parameters (default: console=hvc0 rd.break=initqueue)
+  -h, --help              Show help information.
+
+SUBCOMMANDS:
+  install
+  list
+  start
+
+  See 'msl help <subcommand>' for detailed help.
+```
+
+### Install subcommand
+```
+msl install --help
+
+USAGE: msl install --name <name> [--cpu <cpu>] [--ram <ram>] [--disk <disk>] [--mac <mac>] [--nvme] --iso <iso>
+
+OPTIONS:
+  --name <name>           Virtual machine name
+  --cpu <cpu>             Number of CPUs VM will use (default: 2)
+  --ram <ram>             RAM size in MB (default: 512)
+  --disk <disk>           Disk size in GB (default: 16)
   --mac <mac>             Network device MAC address
-  --nvme                  Create storage as NVME storage device
+  --nvme <nvme>           Create storage as NVME storage device
+  --iso <iso>             Path to ISO image
   -h, --help              Show help information.
 ```
 
-### Preparing images
-Thanks to [https://medium.com/@suyashmohan/setup-wsl-kinda-linux-box-on-macbook-m1-with-apple-virtualization-framework-ec2529f9797] author who made it easy. Let's start with Ubuntu example.
+### Start subcommand
+```
+msl start --help
 
-Download kernel and ramdisk images.
-```sh
-wget -O vmlinuz.gz https://cloud-images.ubuntu.com/releases/noble/release/unpacked/ubuntu-24.04-server-cloudimg-arm64-vmlinuz-generic
-gunzip vmlinuz.gz
+USAGE: msl start --name <name> [--cpu <cpu>] [--ram <ram>] [--mac <mac>] [--nvme]
 
-wget -O initrd https://cloud-images.ubuntu.com/releases/noble/release/unpacked/ubuntu-24.04-server-cloudimg-arm64-initrd-generic
+OPTIONS:
+  --name <name>           Virtual machine name
+  --cpu <cpu>             Number of CPUs VM will use (default: 2)
+  --ram <ram>             RAM size in MB (default: 512)
+  --mac <mac>             Network device MAC address
+  --nvme <nvme>           Create storage as NVME storage device
+  -h, --help              Show help information.
 ```
 
-Download rootfs image.
-```sh
-wget https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-arm64.tar.gz
-tar xzf ubuntu-24.04-server-cloudimg-arm64.tar.gz
+### Install example
+```
+msl install --name ubuntu-2404 --cpu 2 --ram 2048 --disk 64 --iso ~/Downloads/ubuntu-24.04.1-live-server-arm64.iso
+
 ```
 
-First we will boot initramfs only so we can set root password and network device to DHCP mode. If nvme flag was present block device will have different name (check /proc/partitions).
-```sh
-msl --disk noble-server-cloudimg-arm64.img --cmd "console=hvc0 rd.break=initqueue"
+### Start example
+```
+msl start --name ubuntu-2404 --cpu 2 --ram 2048 --mac d6:94:96:e2:bd:aa
+
 ```
 
-```sh
-mkdir /mnt
-mount /dev/vda /mnt
-chroot /mnt
-
-echo 'root:root' | chpasswd
-
-cat <<EOF > /etc/netplan/01-dhcp.yaml
-network:
-  renderer: networkd
-  ethernets:
-    enp0s1:
-      dhcp4: true
-  version: 2
-EOF
+### List example
 ```
+msl list
 
-Now we can boot root image.
-```sh
-msl --disk noble-server-cloudimg-arm64.img --cmd "console=hvc0 rd.break=initqueue root=/dev/vda" --mac a8:e1:be:a5:4d:6f
+alpine
+debian-11
+debian-12
+ubuntu-2204
+ubuntu-2404
 ```
-
-### Resizing rootfs image
-```sh
-brew install qemu
-```
-```sh
-qemu-img resize noble.img 16G
-```
-
 
 ### DHCP server reservation
 Modify /var/db/dhcpd_leases file, then start VM with custom MAC address.
@@ -82,4 +83,12 @@ Modify /var/db/dhcpd_leases file, then start VM with custom MAC address.
   identifier=1,a8:e1:be:a5:4d:6f
   lease=0x66c43d2f
 }
+```
+
+### Resizing rootfs image
+```sh
+brew install qemu
+```
+```sh
+qemu-img resize rootfs.img 128G
 ```
