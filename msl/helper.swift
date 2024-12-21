@@ -126,7 +126,12 @@ func createConsoleConfiguration() -> VZSerialPortConfiguration {
 func createNetworkDeviceConfiguration(mac: String?) -> VZNetworkDeviceConfiguration {
   let networkDevice = VZVirtioNetworkDeviceConfiguration()
   networkDevice.attachment = VZNATNetworkDeviceAttachment()
-  networkDevice.macAddress = VZMACAddress(string: mac!) ?? VZMACAddress.randomLocallyAdministered()
+
+  if mac != nil {
+    networkDevice.macAddress = VZMACAddress(string: mac!) ?? VZMACAddress.randomLocallyAdministered()
+  } else {
+    networkDevice.macAddress = VZMACAddress.randomLocallyAdministered()
+  }
 
   return networkDevice
 }

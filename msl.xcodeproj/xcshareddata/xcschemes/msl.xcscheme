@@ -56,7 +56,15 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "list"
+            argument = "install"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--name bookworm"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--iso /Users/nedimzecic/Downloads/ubuntu-24.04.1-live-server-arm64.iso"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
