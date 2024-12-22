@@ -56,15 +56,35 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "install"
+            argument = "--name alpine"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--name bookworm"
+            argument = "--cpu 2"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--iso /Users/nedimzecic/Downloads/ubuntu-24.04.1-live-server-arm64.iso"
+            argument = "--ram 2048"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--disk 64"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--nvme"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--mac e6:7b:15:04:77:05"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--graphics"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--iso /Users/nedimzecic/Downloads/alpine-virt-3.21.0-aarch64.iso"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

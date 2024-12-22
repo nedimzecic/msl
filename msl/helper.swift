@@ -129,9 +129,16 @@ func createNetworkDeviceConfiguration(mac: String?) -> VZNetworkDeviceConfigurat
 
   if mac != nil {
     networkDevice.macAddress = VZMACAddress(string: mac!) ?? VZMACAddress.randomLocallyAdministered()
-  } else {
-    networkDevice.macAddress = VZMACAddress.randomLocallyAdministered()
   }
 
   return networkDevice
+}
+
+func createGraphicsDeviceConfiguration() -> VZVirtioGraphicsDeviceConfiguration {
+  let graphicsDevice = VZVirtioGraphicsDeviceConfiguration()
+  graphicsDevice.scanouts = [
+    VZVirtioGraphicsScanoutConfiguration(widthInPixels: 1024, heightInPixels: 768)
+  ]
+
+  return graphicsDevice
 }
