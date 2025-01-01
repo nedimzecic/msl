@@ -2,13 +2,15 @@ import Foundation
 import Virtualization
 
 let mslPath = "\(NSHomeDirectory())/.msl"
+var term = termios()
 
 class Delegate: NSObject {
 }
 
 extension Delegate: VZVirtualMachineDelegate {
   func guestDidStop(_ virtualMachine: VZVirtualMachine) {
-    print("The guest shut down. Exiting.")
+    print("Virtual machine shut down. Resettting terminal.")
+    tcsetattr(FileHandle.standardInput.fileDescriptor, TCSANOW, &term)
     exit(EXIT_SUCCESS)
   }
 }
@@ -111,8 +113,9 @@ func createConsoleConfiguration() -> VZSerialPortConfiguration {
 
   // Put stdin into raw mode, disabling local echo, input canonicalization,
   // and CR-NL mapping.
-  var attributes = termios()
-  tcgetattr(inputFileHandle.fileDescriptor, &attributes)
+  //var attributes = termios()
+  tcgetattr(inputFileHandle.fileDescriptor, &term)
+  var attributes = term
   attributes.c_iflag &= ~tcflag_t(ICRNL)
   attributes.c_lflag &= ~tcflag_t(ICANON | ECHO)
   tcsetattr(inputFileHandle.fileDescriptor, TCSANOW, &attributes)

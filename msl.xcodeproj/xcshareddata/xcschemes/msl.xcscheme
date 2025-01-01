@@ -64,12 +64,12 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "--ram 2048"
+            argument = "--ram 512"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--disk 64"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--nvme"
@@ -81,11 +81,11 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--graphics"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--iso /Users/nedimzecic/Downloads/alpine-virt-3.21.0-aarch64.iso"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

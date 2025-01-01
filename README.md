@@ -25,7 +25,7 @@ msl --name noble --cpu 2 --ram 2048 --disk 64 --nvme --mac 96:eb:d3:f9:24:ad --i
 ```
 After install you can use vm with:
 ```
-msl --name noble --cpu 2 --ram 2048 --nvme --mac 96:eb:d3:f9:24:ad; reset
+msl --name noble --cpu 2 --ram 2048 --nvme --mac 96:eb:d3:f9:24:ad
 ```
 
 ### Alpine example
@@ -43,7 +43,7 @@ hvc0::respawn:/sbin/getty -L 115200 hvc0 vt100
 ```
 After doing update-grub we can boot vm without graphics and input devices.
 ```
-msl --name alpine --cpu 2 --ram 512 --mac e6:7b:15:04:77:05; reset
+msl --name alpine --cpu 2 --ram 512 --mac e6:7b:15:04:77:05
 ```
 
 ### Debian example
@@ -61,7 +61,7 @@ virtio_console
 ```
 After doing update-grub and update-initramfs -u we can boot vm without graphics and input devices.
 ```
-msl --name bookworm --cpu 2 --ram 1024 --nvme --mac 12:9c:e5:86:26:6c; reset
+msl --name bookworm --cpu 2 --ram 1024 --nvme --mac 12:9c:e5:86:26:6c
 ```
 
 ### DHCP server reservation

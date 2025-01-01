@@ -49,7 +49,7 @@ final class VirtualMachine {
       fatalError("Invalid disks array.")
     }
     configuration.storageDevices = disks
-    configuration.serialPorts = [ createConsoleConfiguration() ]
+    configuration.serialPorts = [createConsoleConfiguration()]
     configuration.networkDevices = [ createNetworkDeviceConfiguration(mac: mac) ]
     configuration.entropyDevices = [VZVirtioEntropyDeviceConfiguration()]
 
