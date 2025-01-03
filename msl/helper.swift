@@ -9,7 +9,6 @@ class Delegate: NSObject {
 
 extension Delegate: VZVirtualMachineDelegate {
   func guestDidStop(_ virtualMachine: VZVirtualMachine) {
-    print("Virtual machine shut down. Resettting terminal.")
     tcsetattr(FileHandle.standardInput.fileDescriptor, TCSANOW, &term)
     exit(EXIT_SUCCESS)
   }
