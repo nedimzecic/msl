@@ -1,5 +1,3 @@
-# macOS Subsystem for Linux
-
 A small WSL2-like tool for running lightweight linux virtual machines on macOS. Code is based on Apple's Virtualization framework examples. Virtual machine bundles are stored in ~/.msl directory. This tool was intended to be pure terminal however some installers do not support serial console thus --graphics flag was added which will virtualize graphics device.
 ```
 msl --help
